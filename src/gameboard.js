@@ -1,32 +1,6 @@
-function Ship(position) {
-    const length = position.length;
-    const hitPositions = [];
-    const hit = (num) => {
-        hitPositions.push(num);
-    }
-    const isSunk = () => {
-        if (hitPositions.length === length) return true;
-    }
-    return { length, position, hitPositions, hit, isSunk };
-}
-
-function Player(team) {
-    let score = 0;
-    let attackList = [];
-    let attack = () => {
-        let currentMove = Gameboard.positions[Math.floor(Math.random() * (Gameboard.positions.length - 1))];
-        while (attackList.includes(currentMove)) {
-            currentMove = Gameboard.positions[Math.floor(Math.random() * (Gameboard.positions.length - 1))];
-        }
-        attackList.push(currentMove);
-        return currentMove;
-    }
-
-    return { score, team, attack };
-}
+import { Ship } from "./ship";
 
 const Gameboard = (() => {
-    const board = document.getElementById("gameboard");
     const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let byLetter = [[],[],[],[],[],[],[],[],[],[]];
@@ -171,37 +145,21 @@ const Gameboard = (() => {
         // console.log(ship.position);
     } // End of pick positions
 
+    for (let i = 0; i < shipList.length; i++) {
+        pickPositions(shipList[i]);
+        console.log(shipList[i].position);
+    }
+
+    // This can be separated into a different module
+    
+
     return { 
         missedAttacks,
         positions,
-        displayBoard: () => { // Move above? 
-            for (let i = 0; i < shipList.length; i++) {
-                pickPositions(shipList[i]);
-                console.log(shipList[i].position);
-            }
-            for (let i = 0; i < positions.length; i++) {
-                const space = document.createElement("div");
-                space.textContent = positions[i];
-                board.appendChild(space);
-                if (ship1.position.includes(space.textContent)) {
-                    space.classList.add("taken1");
-                }
-                if (ship2.position.includes(space.textContent)) {
-                    space.classList.add("taken2");
-                }
-                if (ship3.position.includes(space.textContent)) {
-                    space.classList.add("taken3");
-                }
-                if (ship4.position.includes(space.textContent)) {
-                    space.classList.add("taken4");
-                }
-            }
-        },
-        // displayShips: () => {
-        //     for (let i = 0; i < shipList.length; i++) {
-        //         pickPositions(shipList[i]);
-        //     }
-        // },
+        ship1,
+        ship2,
+        ship3,
+        ship4,
         receiveAttack: (attack) => {
             let flag = false;
             for (let i = 0; i < shipList.length; i++) {
@@ -229,9 +187,4 @@ const Gameboard = (() => {
     };
 })();
 
-Gameboard.displayBoard();
-const quentin = Player("human");
-const computer = Player("computer");
-
-
-// export { Ship, Gameboard }
+export { Gameboard };
