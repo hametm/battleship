@@ -30,6 +30,16 @@ function displayBoard(gameboard) {
     }
 }
 
+function hideGameboard(gameboard) {
+    const spaces = document.querySelectorAll(".taken");
+    spaces.forEach(space => {
+        if (space.classList.contains(`${gameboard.player.name}`)) {
+            space.classList.remove("taken1", "taken2", "taken3", "taken4");
+        }
+    })
+
+}
+
 function pickSpace(opponent, attack) {
     const opponentSpaces = document.querySelectorAll(`.${opponent.name}`);
     opponentSpaces.forEach(space => {
@@ -78,4 +88,4 @@ function announceWinner(gameboard) {
 
 
 
-export { displayBoard, pickSpace, markAttack, announceWinner };
+export { displayBoard, hideGameboard, pickSpace, markAttack, announceWinner };
