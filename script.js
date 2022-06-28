@@ -173,18 +173,20 @@ const Gameboard = (() => {
             console.log(positions);
         },
         receiveAttack: (attack) => {
-            console.log("length: " + shipList.length);
-            console.log("list");
-            console.log(shipList);
+            let flag = false;
             for (let i = 0; i < shipList.length; i++) {
                 console.log(shipList[i].position);
                 if (shipList[i].position.includes(attack)) {
                     shipList[i].hit(attack);
                     console.log("HIT");
-                    break;
+                    flag = true;
                 }
-                if (missedAttacks.includes(attack)) continue;
-                else missedAttacks.push(attack);
+            }
+            for (let i = 0; i < shipList.length; i++) {
+                if (!flag) {
+                    if (missedAttacks.includes(attack)) continue;
+                    else missedAttacks.push(attack);
+                }
             }
         },
         checkIfSunk: () => {
@@ -199,5 +201,7 @@ const Gameboard = (() => {
 
 Gameboard.displayShips();
 const quentin = Player("human");
+console.log("Quentin attack: " + quentin.attack);
+Gameboard.receiveAttack(quentin.attack);
 
-export { Ship, Gameboard }
+// export { Ship, Gameboard }
