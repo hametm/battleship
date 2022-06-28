@@ -10,6 +10,12 @@ function Ship(position) {
     return { length, position, hitPositions, hit, isSunk };
 }
 
+function Player(team) {
+    let score = 0;
+    let attack = Gameboard.positions[Math.floor(Math.random() * (Gameboard.positions.length - 1))];
+    return { score, team, attack };
+}
+
 const Gameboard = (() => {
     const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -73,10 +79,10 @@ const Gameboard = (() => {
 
 
         function getStartPosition() {
-            startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
+            startPosition = positions[Math.floor(Math.random() * (positions.length - 1))]; // Add 1 at the end?
             while (checkIfTaken(startPosition)) {
                 // console.log("******* Start position taken ********");
-                startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
+                startPosition = positions[Math.floor(Math.random() * (positions.length - 1))];
             }
          
         }
@@ -157,6 +163,7 @@ const Gameboard = (() => {
 
     return { 
         missedAttacks,
+        positions,
         displayShips: () => {
             for (let i = 0; i < shipList.length; i++) {
                 pickPositions(shipList[i]);
@@ -191,5 +198,6 @@ const Gameboard = (() => {
 })();
 
 Gameboard.displayShips();
+const quentin = Player("human");
 
 export { Ship, Gameboard }
