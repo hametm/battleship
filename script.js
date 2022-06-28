@@ -20,7 +20,8 @@ const Gameboard = (() => {
     const ship2 = Ship([1]);
     const ship3 = Ship([1]);
     const ship4 = Ship([1]);
-    const shipList = [ship1, ship2, ship3, ship4]
+    const shipList = [ship1, ship2, ship3, ship4];
+    const missedAttacks = [];
 
     // Set up positions
     for (let i = 0; i < letters.length; i++) {
@@ -74,7 +75,7 @@ const Gameboard = (() => {
         function getStartPosition() {
             startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
             while (checkIfTaken(startPosition)) {
-                console.log("******* Start position taken ********");
+                // console.log("******* Start position taken ********");
                 startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
             }
          
@@ -112,7 +113,7 @@ const Gameboard = (() => {
 
         // Ship if horizontal
         if (direction === 1) {
-            console.log("horizontal");
+            // console.log("horizontal");
             let innerIndex = innerLetterIndex;
             let outerIndex = outerLetterIndex;
             shipPositions.push(startPosition);
@@ -122,7 +123,7 @@ const Gameboard = (() => {
             for (let i = 0; i < length - 1; i++) {
                 let position = byLetter[outerIndex][innerIndex + 1];
                 if (checkIfTaken(position)) {
-                    console.log("***** Horizontal space taken *******");
+                    // console.log("***** Horizontal space taken *******");
                     break;
                 }
                 shipPositions.push(position);
@@ -133,7 +134,7 @@ const Gameboard = (() => {
 
         // Ship if vertical
         if (direction === 2) {
-            console.log("vertical");
+            // console.log("vertical");
             let innerIndex = innerNumberIndex;
             let outerIndex = outerNumberIndex;
             shipPositions.push(startPosition);
@@ -143,7 +144,7 @@ const Gameboard = (() => {
             for (let i = 0; i < length - 1; i++) {
                 let position = byNumber[outerIndex][innerIndex + 1];
                 if (checkIfTaken(position)) {
-                    console.log("****** Vertical space taken ******");
+                    // console.log("****** Vertical space taken ******");
                     break;
                 }
                 shipPositions.push(position);
@@ -151,10 +152,11 @@ const Gameboard = (() => {
             }
             ship.position = shipPositions;
         }
-        console.log(ship.position);
-    }
+        // console.log(ship.position);
+    } // End of pick positions
 
     return { 
+        missedAttacks,
         displayShips: () => {
             for (let i = 0; i < shipList.length; i++) {
                 pickPositions(shipList[i]);
@@ -162,10 +164,32 @@ const Gameboard = (() => {
         },
         displayBoard: () => {
             console.log(positions);
-    } 
-};
+        },
+        receiveAttack: (attack) => {
+            console.log("length: " + shipList.length);
+            console.log("list");
+            console.log(shipList);
+            for (let i = 0; i < shipList.length; i++) {
+                console.log(shipList[i].position);
+                if (shipList[i].position.includes(attack)) {
+                    shipList[i].hit(attack);
+                    console.log("HIT");
+                    break;
+                }
+                if (missedAttacks.includes(attack)) continue;
+                else missedAttacks.push(attack);
+            }
+        },
+        checkIfSunk: () => {
+            let sunkShips  = 0;
+            for (let i = 0; i < shipList.length; i++) {
+                if (shipList[i].isSunk) sunkShips ++;
+            }
+            if (sunkShips === 5) return true;
+        } 
+    };
 })();
 
 Gameboard.displayShips();
 
-// export { Ship, Gameboard }
+export { Ship, Gameboard }
