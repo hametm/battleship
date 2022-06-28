@@ -1,0 +1,25 @@
+#gameboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.taken1 {
+    color: pink;
+    font-weight: bold;
+}
+
+.taken2 {
+    color: green;
+    font-weight: bold;
+}
+
+.taken3 {
+    color: blue;
+    font-weight: bold;
+}
+
+.taken4 {
+    color: yellow;
+    font-weight: bold;
+}

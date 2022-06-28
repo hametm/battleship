@@ -12,20 +12,30 @@ function Ship(position) {
 
 function Player(team) {
     let score = 0;
-    let attack = Gameboard.positions[Math.floor(Math.random() * (Gameboard.positions.length - 1))];
+    let attackList = [];
+    let attack = () => {
+        let currentMove = Gameboard.positions[Math.floor(Math.random() * (Gameboard.positions.length - 1))];
+        while (attackList.includes(currentMove)) {
+            currentMove = Gameboard.positions[Math.floor(Math.random() * (Gameboard.positions.length - 1))];
+        }
+        attackList.push(currentMove);
+        return currentMove;
+    }
+
     return { score, team, attack };
 }
 
 const Gameboard = (() => {
+    const board = document.getElementById("gameboard");
     const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let byLetter = [[],[],[],[],[],[],[],[],[],[]];
     let byNumber = [[],[],[],[],[],[],[],[],[],[]];
     const positions = [];
-    const ship1 = Ship([1]);
-    const ship2 = Ship([1]);
-    const ship3 = Ship([1]);
-    const ship4 = Ship([1]);
+    const ship1 = Ship([]);
+    const ship2 = Ship([]);
+    const ship3 = Ship([]);
+    const ship4 = Ship([]);
     const shipList = [ship1, ship2, ship3, ship4];
     const missedAttacks = [];
 
@@ -67,7 +77,7 @@ const Gameboard = (() => {
 
     const pickPositions = (ship) => {
         let shipPositions = [];
-        let length = Math.floor(Math.random() * 5 + 1);
+        let length = Math.floor(Math.random() * 4 + 1);
         let startPosition;
         let outerLetterIndex;
         let innerLetterIndex;
@@ -115,7 +125,7 @@ const Gameboard = (() => {
             }
         }   
 
-        console.log("Start position: " + startPosition);
+        // console.log("Start position: " + startPosition);
 
         // Ship if horizontal
         if (direction === 1) {
@@ -164,14 +174,34 @@ const Gameboard = (() => {
     return { 
         missedAttacks,
         positions,
-        displayShips: () => {
+        displayBoard: () => { // Move above? 
             for (let i = 0; i < shipList.length; i++) {
                 pickPositions(shipList[i]);
+                console.log(shipList[i].position);
+            }
+            for (let i = 0; i < positions.length; i++) {
+                const space = document.createElement("div");
+                space.textContent = positions[i];
+                board.appendChild(space);
+                if (ship1.position.includes(space.textContent)) {
+                    space.classList.add("taken1");
+                }
+                if (ship2.position.includes(space.textContent)) {
+                    space.classList.add("taken2");
+                }
+                if (ship3.position.includes(space.textContent)) {
+                    space.classList.add("taken3");
+                }
+                if (ship4.position.includes(space.textContent)) {
+                    space.classList.add("taken4");
+                }
             }
         },
-        displayBoard: () => {
-            console.log(positions);
-        },
+        // displayShips: () => {
+        //     for (let i = 0; i < shipList.length; i++) {
+        //         pickPositions(shipList[i]);
+        //     }
+        // },
         receiveAttack: (attack) => {
             let flag = false;
             for (let i = 0; i < shipList.length; i++) {
@@ -199,9 +229,9 @@ const Gameboard = (() => {
     };
 })();
 
-Gameboard.displayShips();
+Gameboard.displayBoard();
 const quentin = Player("human");
-console.log("Quentin attack: " + quentin.attack);
-Gameboard.receiveAttack(quentin.attack);
+const computer = Player("computer");
+
 
 // export { Ship, Gameboard }
