@@ -27,15 +27,31 @@ function displayBoard(gameboard) {
     }
 }
 
-function markAttack(opponent, attack) {
-    console.log("Attack: " + attack);
+function markAttack(opponent, attack, gameboard) {
     const opponentSpaces = document.querySelectorAll(`.${opponent.name}`);
+    let hitSpace;
+    for (let i = 0; i < gameboard.shipList.length; i++) {
+        console.log("Hit positions: " + gameboard.shipList[i].hitPositions);
+        opponentSpaces.forEach(div => {
+            if (gameboard.shipList[i].hitPositions.includes(div.textContent)) {
+                div.style.backgroundColor = "red";
+            }
+        })
+    }
     opponentSpaces.forEach(div => {
         if (div.textContent === attack) {
             div.style.border = "1px solid";
         }
-
+        
     })
 }
+
+// function markHit(gameboard) {
+//     for (let i = 0; i < shipList.length; i++) {
+//         if (shipList[i].hitPositions.includes(attack)) {
+
+//         }
+//     }
+// }
 
 export { displayBoard, markAttack };

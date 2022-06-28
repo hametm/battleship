@@ -65,7 +65,6 @@ function Gameboard (player) {
         function getStartPosition() {
             startPosition = positions[Math.floor(Math.random() * (positions.length - 1))]; // Add 1 at the end?
             while (checkIfTaken(startPosition)) {
-                // console.log("******* Start position taken ********");
                 startPosition = positions[Math.floor(Math.random() * (positions.length - 1))];
             }
          
@@ -99,11 +98,8 @@ function Gameboard (player) {
             }
         }   
 
-        // console.log("Start position: " + startPosition);
-
         // Ship if horizontal
         if (direction === 1) {
-            // console.log("horizontal");
             let innerIndex = innerLetterIndex;
             let outerIndex = outerLetterIndex;
             shipPositions.push(startPosition);
@@ -113,7 +109,6 @@ function Gameboard (player) {
             for (let i = 0; i < length - 1; i++) {
                 let position = byLetter[outerIndex][innerIndex + 1];
                 if (checkIfTaken(position)) {
-                    // console.log("***** Horizontal space taken *******");
                     break;
                 }
                 shipPositions.push(position);
@@ -124,7 +119,6 @@ function Gameboard (player) {
 
         // Ship if vertical
         if (direction === 2) {
-            // console.log("vertical");
             let innerIndex = innerNumberIndex;
             let outerIndex = outerNumberIndex;
             shipPositions.push(startPosition);
@@ -134,7 +128,6 @@ function Gameboard (player) {
             for (let i = 0; i < length - 1; i++) {
                 let position = byNumber[outerIndex][innerIndex + 1];
                 if (checkIfTaken(position)) {
-                    // console.log("****** Vertical space taken ******");
                     break;
                 }
                 shipPositions.push(position);
@@ -142,12 +135,10 @@ function Gameboard (player) {
             }
             ship.position = shipPositions;
         }
-        // console.log(ship.position);
     } // End of pick positions
 
     for (let i = 0; i < shipList.length; i++) {
         pickPositions(shipList[i]);
-        console.log(shipList[i].position);
     }
 
 
@@ -159,10 +150,11 @@ function Gameboard (player) {
         ship2,
         ship3,
         ship4,
+        shipList,
         receiveAttack: (attack) => {
+            console.log("attack: " + attack);
             let flag = false;
             for (let i = 0; i < shipList.length; i++) {
-                console.log(shipList[i].position);
                 if (shipList[i].position.includes(attack)) {
                     shipList[i].hit(attack);
                     console.log("HIT");

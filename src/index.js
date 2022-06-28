@@ -9,12 +9,21 @@ function playGame() {
     const player2 = Player("computer");
     const player1Board = Gameboard(player1);
     const player2Board = Gameboard(player2);
+    let player1Attack = player1.attack(player2Board);
+    let player2Attack = player2.attack(player1Board);
+
     displayBoard(player1Board);
     displayBoard(player2Board);
-    player1Board.receiveAttack(player1.attack);
-    player2Board.receiveAttack(player2.attack);
-    markAttack(player2, player1.attack(player2Board));
-    markAttack(player1, player2.attack(player1Board));
+
+    player1Board.receiveAttack(player1Attack);
+    player2Board.receiveAttack(player2Attack);
+
+    markAttack(player2, player1Attack, player2Board);
+    markAttack(player1, player2Attack, player1Board);
+
+    player1Board.checkIfSunk();
+    player2Board.checkIfSunk();
+
 }
 
 playGame();
