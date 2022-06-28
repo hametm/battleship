@@ -16,12 +16,13 @@ const Gameboard = (() => {
     let byLetter = [[],[],[],[],[],[],[],[],[],[]];
     let byNumber = [[],[],[],[],[],[],[],[],[],[]];
     const positions = [];
-    const ship1 = Ship([]);
-    const ship2 = Ship([]);
-    const ship3 = Ship([]);
-    const ship4 = Ship([]);
+    const ship1 = Ship([1]);
+    const ship2 = Ship([1]);
+    const ship3 = Ship([1]);
+    const ship4 = Ship([1]);
+    const shipList = [ship1, ship2, ship3, ship4]
 
-
+    // Set up positions
     for (let i = 0; i < letters.length; i++) {
         for (let j = 0; j < numbers.length; j++) {
             let position = letters[i] + numbers[j];
@@ -67,6 +68,19 @@ const Gameboard = (() => {
         let innerNumberIndex;
         let direction = Math.floor(Math.random() * 2 + 1);
 
+        function getStartPosition() {
+            let startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
+            for (let i = 0; i < shipList.length; i++) {
+                if (shipList[i]) {
+                    if (shipList[i].position.includes(startPosition)) {
+                        console.log("here");
+                    }
+                }
+                }
+         
+        }
+        getStartPosition();
+
         // Get letter indices
         for (let i = 0; i < byLetter.length; i++) {
             for (let j = 0; j < byLetter[i].length; j++) {
@@ -93,7 +107,7 @@ const Gameboard = (() => {
 
         // If horizontal
         if (direction === 1) {
-            console.log("by letter");
+            console.log("horizontal");
             let innerIndex = innerLetterIndex;
             let outerIndex = outerLetterIndex;
             shipPositions.push(startPosition);
@@ -109,7 +123,7 @@ const Gameboard = (() => {
 
         // If vertical
         if (direction === 2) {
-            console.log("by number");
+            console.log("vertical");
             let innerIndex = innerNumberIndex;
             let outerIndex = outerNumberIndex;
             shipPositions.push(startPosition);
@@ -127,10 +141,11 @@ const Gameboard = (() => {
 
     return { 
         displayShips: () => {
-            pickPositions(ship1);
+            for (let i = 0; i < shipList.length; i++) {
+                pickPositions(shipList[i]);
+            }
         },
         displayBoard: () => {
-           
             console.log(positions);
     } 
 };
