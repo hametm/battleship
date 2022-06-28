@@ -152,12 +152,12 @@ function Gameboard (player) {
         ship4,
         shipList,
         receiveAttack: (attack) => {
-            console.log("attack: " + attack);
+            // console.log(`${player.name} receive attack: ` + attack);
             let flag = false;
             for (let i = 0; i < shipList.length; i++) {
                 if (shipList[i].position.includes(attack)) {
                     shipList[i].hit(attack);
-                    console.log("HIT");
+                    // console.log("HIT");
                     flag = true;
                 }
             }
@@ -167,11 +167,12 @@ function Gameboard (player) {
                     else missedAttacks.push(attack);
                 }
             }
+            // flag = false;
         },
         checkIfSunk: () => {
             let sunkShips  = 0;
             for (let i = 0; i < shipList.length; i++) {
-                if (shipList[i].isSunk) sunkShips ++;
+                if (shipList[i].isSunk()) sunkShips ++;
             }
             if (sunkShips === 5) return true;
         } 
