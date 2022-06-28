@@ -1,6 +1,6 @@
 import { Gameboard } from "./gameboard";
 
-function displayBoard() {
+function displayBoard(Gameboard) {
     const board = document.getElementById("gameboard");
     for (let i = 0; i < Gameboard.positions.length; i++) {
         const space = document.createElement("div");

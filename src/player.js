@@ -1,6 +1,6 @@
 import { Gameboard } from "./gameboard";
 
-function Player(team) {
+function Player(name) {
     let score = 0;
     let attackList = [];
     let attack = () => {
@@ -12,7 +12,7 @@ function Player(team) {
         return currentMove;
     }
 
-    return { score, team, attack };
+    return { name, score, attack };
 }
 
 export { Player };

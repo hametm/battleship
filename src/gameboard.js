@@ -1,6 +1,6 @@
 import { Ship } from "./ship";
 
-const Gameboard = (() => {
+function Gameboard (player) {
     const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let byLetter = [[],[],[],[],[],[],[],[],[],[]];
@@ -150,10 +150,9 @@ const Gameboard = (() => {
         console.log(shipList[i].position);
     }
 
-    // This can be separated into a different module
-    
 
     return { 
+        player,
         missedAttacks,
         positions,
         ship1,
@@ -185,6 +184,6 @@ const Gameboard = (() => {
             if (sunkShips === 5) return true;
         } 
     };
-})();
+};
 
 export { Gameboard };
