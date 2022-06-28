@@ -127,7 +127,7 @@ const Gameboard = (() => {
 
     return { 
         displayShips: () => {
-            ickPositions(ship1);
+            pickPositions(ship1);
         },
         displayBoard: () => {
            
