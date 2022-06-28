@@ -61,25 +61,32 @@ const Gameboard = (() => {
     const pickPositions = (ship) => {
         let shipPositions = [];
         let length = Math.floor(Math.random() * 5 + 1);
-        let startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
+        let startPosition;
         let outerLetterIndex;
         let innerLetterIndex;
         let outerNumberIndex;
         let innerNumberIndex;
         let direction = Math.floor(Math.random() * 2 + 1);
 
+        getStartPosition();
+
+
         function getStartPosition() {
-            let startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
-            for (let i = 0; i < shipList.length; i++) {
-                if (shipList[i]) {
-                    if (shipList[i].position.includes(startPosition)) {
-                        console.log("here");
-                    }
-                }
-                }
+            startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
+            while (checkIfTaken(startPosition)) {
+                console.log("******* Start position taken ********");
+                startPosition = positions[Math.floor(Math.random() * positions.length + 1)];
+            }
          
         }
-        getStartPosition();
+
+        function checkIfTaken(positionCheck) {
+            for (let i = 0; i < shipList.length; i++) {
+                if (shipList[i].position.includes(positionCheck)) {
+                    return true;
+                }
+            }
+        }
 
         // Get letter indices
         for (let i = 0; i < byLetter.length; i++) {
@@ -101,11 +108,9 @@ const Gameboard = (() => {
             }
         }   
 
-        console.log(startPosition);
-        console.log("outer: " + outerNumberIndex + "inner: " + innerNumberIndex);
-        console.log("outer: " + outerLetterIndex + "inner: " + innerLetterIndex);
+        console.log("Start position: " + startPosition);
 
-        // If horizontal
+        // Ship if horizontal
         if (direction === 1) {
             console.log("horizontal");
             let innerIndex = innerLetterIndex;
@@ -115,13 +120,18 @@ const Gameboard = (() => {
                 length = 10 - innerLetterIndex;
             }
             for (let i = 0; i < length - 1; i++) {
-                shipPositions.push(byLetter[outerIndex][innerIndex + 1]);
+                let position = byLetter[outerIndex][innerIndex + 1];
+                if (checkIfTaken(position)) {
+                    console.log("***** Horizontal space taken *******");
+                    break;
+                }
+                shipPositions.push(position);
                 innerIndex++;
             }
             ship.position = shipPositions;
         }
 
-        // If vertical
+        // Ship if vertical
         if (direction === 2) {
             console.log("vertical");
             let innerIndex = innerNumberIndex;
@@ -131,7 +141,12 @@ const Gameboard = (() => {
                 length = 10 - innerNumberIndex;
             }
             for (let i = 0; i < length - 1; i++) {
-                shipPositions.push(byNumber[outerIndex][innerIndex + 1]);
+                let position = byNumber[outerIndex][innerIndex + 1];
+                if (checkIfTaken(position)) {
+                    console.log("****** Vertical space taken ******");
+                    break;
+                }
+                shipPositions.push(position);
                 innerIndex++;
             }
             ship.position = shipPositions;
