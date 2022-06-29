@@ -5,7 +5,6 @@ function Gameboard (player) {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let byLetter = [[],[],[],[],[],[],[],[],[],[]];
     let byNumber = [[],[],[],[],[],[],[],[],[],[]];
-    const positions = [];
     const ship1 = Ship([]);
     const ship2 = Ship([]);
     const ship3 = Ship([]);
@@ -17,11 +16,14 @@ function Gameboard (player) {
     for (let i = 0; i < letters.length; i++) {
         for (let j = 0; j < numbers.length; j++) {
             let position = letters[i] + numbers[j];
-            positions.push(position);
+            // positions.push(position);
             getRows(position, i);
             getColumns(position, j);
+            // positions = [byNumber.flat()];
         }
     }
+    
+    let positions = byNumber.flat();
 
     function getRows(position, i) {
         if (letters[i] === "A") byLetter[0].push(position);
@@ -156,6 +158,7 @@ function Gameboard (player) {
             for (let i = 0; i < shipList.length; i++) {
                 if (shipList[i].position.includes(attack)) {
                     shipList[i].hit(attack);
+                    // console.log(shipList[i].hitPositions);
                     flag = true;
                 }
             }
