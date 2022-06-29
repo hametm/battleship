@@ -1,20 +1,46 @@
 body {
     margin: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
 }
 
-#canvas {
+#display {
     display: flex;
     gap: 20px;
     align-content: center;
+    justify-content: space-evenly;
+    width: 95%;
 }
 
 .board {
     display: grid;
     grid-template-columns: repeat(10, 50px);
     grid-template-rows: repeat(10, 50px);
-    margin: 20px;
+    margin: 0;
     place-content: center;
+}
+
+.numberContainer {
+    display: flex;
+    align-items: flex-start;
+}
+
+.letterHeader {
+    display: flex;
+}
+
+.numberHeader {
+
+}
+
+.letterSpace, .numberSpace {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .taken {
@@ -56,4 +82,9 @@ body {
     width: 3px;
     background-color: black;
     border-radius: 50%;
+}
+
+.space.computer:hover {
+    background-color: rgb(197, 197, 215);
+    cursor: pointer;
 }

@@ -13,17 +13,25 @@ hideGameboard(player2Board);
 function displayBoard(gameboard) {
     const name = document.createElement("h1");
     name.textContent = `${gameboard.player.name}`;
-    const canvas = document.getElementById("canvas");
-    canvas.appendChild(name);
+    const display = document.getElementById("display");
+
     const board = document.createElement("div");
+    const boardContainer = document.createElement("div");
+    const numberContainer = document.createElement("div");
+    numberContainer.classList.add("numberContainer");
+    const letterContainer = document.createElement("div");
+    letterContainer.classList.add("letterContainer");
+    boardContainer.classList.add("boardContainer");
     board.classList.add("board");
+
+
     for (let i = 0; i < gameboard.positions.length; i++) {
         const space = document.createElement("div");
         space.classList.add("space");
         space.classList.add(`${gameboard.player.name}`);
         space.dataset.id = `${gameboard.positions[i]}`;
         board.appendChild(space);
-        canvas.appendChild(board);
+        display.appendChild(boardContainer);
         if (gameboard.ship1.position.includes(space.dataset.id)) {
             space.classList.add("taken", "taken1");
         }
@@ -37,6 +45,46 @@ function displayBoard(gameboard) {
             space.classList.add("taken","taken4");
         }
     }
+    letterContainer.appendChild(numberContainer)
+    boardContainer.appendChild(letterContainer);
+
+    createLetterRow(letterContainer, boardContainer);
+    createNumberColumn(numberContainer, letterContainer);
+
+    numberContainer.appendChild(board);
+    boardContainer.appendChild(name);
+
+
+}
+
+function createLetterRow(container1, container2) {
+    const letters = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+    const container = document.querySelector(".boardContainer");
+    const header = document.createElement("div");
+    const display = document.getElementById("display");
+    header.classList.add("letterHeader");
+    for (let i = 0; i < letters.length; i++) {
+        const letterSpace = document.createElement("div");
+        letterSpace.textContent = letters[i];
+        letterSpace.classList.add("letterSpace");
+        header.appendChild(letterSpace);
+    }
+    container1.appendChild(header);
+    container2.appendChild(container1);
+}
+
+function createNumberColumn(container1, container2) {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const header = document.createElement("div");
+    header.classList.add("numberHeader");
+    for (let i = 0; i < numbers.length; i++) {
+        const numberSpace = document.createElement("div");
+        numberSpace.textContent = numbers[i];
+        numberSpace.classList.add("numberSpace");
+        header.appendChild(numberSpace);
+    }
+    container1.appendChild(header);
+    container2.appendChild(container1);
 }
 
 function hideGameboard(gameboard) {
@@ -90,10 +138,10 @@ function markAttack(opponent, attack, gameboard) {
 
 function announceWinner(gameboard) {
     if (gameboard.checkIfSunk()) {
-        const canvas = document.getElementById("canvas");
+        const display = document.getElementById("display");
         const announcement = document.createElement("h1");
         announcement.textContent = `${gameboard.player.name} loses`;
-        canvas.appendChild(announcement);
+        display.appendChild(announcement);
     }
 }
 
