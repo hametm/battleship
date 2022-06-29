@@ -8,6 +8,7 @@ const player1Board = Gameboard(player1);
 const player2Board = Gameboard(player2);
 displayBoard(player1Board);
 displayBoard(player2Board);
+hideGameboard(player2Board);
 
 function displayBoard(gameboard) {
     const name = document.createElement("h2");
@@ -131,12 +132,48 @@ function markAttack(opponent, attack, gameboard) {
     })
 }
 
+function resetGame() {
+    player1.attackList = [];
+    player2.attackList = [];
+    for (let i = 0; i < player1Board.shipList.length; i++) {
+        player1Board.shipList[i].hitPositions = [];
+    }
+    for (let i = 0; i < player2Board.shipList.length; i++) {
+        player2Board.shipList[i].hitPositions = [];
+    }
+    const display = document.getElementById("display");
+    display.innerHTML = "";
+}
+
 function announceWinner(gameboard) {
     if (gameboard.checkIfSunk()) {
+        const boards = document.querySelectorAll(".board");
+        boards.forEach(board => {
+            board.classList.add("loser");
+        });
         const display = document.getElementById("display");
-        const announcement = document.createElement("h1");
-        announcement.textContent = `${gameboard.player.name} loses`;
+        const announcement = document.createElement("div");
+        const announcementText = document.createElement("h3");
+        const playAgainBtn = document.createElement("button");
+        playAgainBtn.textContent = "Play again";
+        announcement.classList.add("announcement");
+        if (gameboard.player.name === "computer") {
+            announcementText.textContent = "You win!";
+        }
+        if (gameboard.player.name === "you") {
+            announcementText.textContent = "The computer wins!";
+        }
+        announcement.appendChild(announcementText);
         display.appendChild(announcement);
+        playAgainBtn.onclick = () => {
+            resetGame();
+            
+            const player1Board = Gameboard(player1);
+            const player2Board = Gameboard(player2);
+            displayBoard(player1Board);
+            displayBoard(player2Board);
+            pickSpace();
+        }
     }
 }
 

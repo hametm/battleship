@@ -153,11 +153,9 @@ function Gameboard (player) {
         shipList,
         receiveAttack: (attack) => {
             let flag = false;
-            // console.log(attack);
             for (let i = 0; i < shipList.length; i++) {
                 if (shipList[i].position.includes(attack)) {
                     shipList[i].hit(attack);
-                    // console.log(shipList[i].hitPositions);
                     flag = true;
                 }
             }
@@ -167,7 +165,6 @@ function Gameboard (player) {
                     else missedAttacks.push(attack);
                 }
             }
-            // flag = false;
         },
         checkIfSunk: () => {
             let sunkShips = 0;

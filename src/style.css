@@ -132,6 +132,39 @@ h2 {
     cursor: pointer;
 }
 
+@keyframes fadein {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+}
+
+.announcement {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    animation: linear .5s fadein;
+    font-size: 3rem;
+    background-color: white;
+    height: 30%;
+    width: 30%;
+    box-shadow: -2px 2px 5px grey;
+    display: grid;
+    place-items: center;
+}
+
+h3 {
+    margin: 0;
+}
+
+.loser {
+    background-color: rgb(225, 225, 225);
+}
+
 footer {
     display: flex;
     justify-content: center;
