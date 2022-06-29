@@ -6,15 +6,7 @@ function Player(name) {
     let addAttack = (currentAttack) => {
         attackList.push(currentAttack);
     }
-    let attack = (Gameboard) => {
-        let currentMove = Gameboard.positions[Math.floor(Math.random() * (Gameboard.positions.length - 1))];
-        while (attackList.includes(currentMove)) {
-            currentMove = Gameboard.positions[Math.floor(Math.random() * (Gameboard.positions.length - 1))];
-        }
-        attackList.push(currentMove);
-        return currentMove;
-    }
-
+    let attack;
     return { name, score, attack, addAttack, attackList };
 }
 

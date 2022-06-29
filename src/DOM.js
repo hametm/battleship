@@ -1,5 +1,15 @@
 import { Gameboard } from "./gameboard";
 import { Player } from "./player";
+import { playRound } from "./game";
+
+const player1 = Player("you");
+const player2 = Player("computer");
+const button = document.querySelector("button");
+const player1Board = Gameboard(player1);
+const player2Board = Gameboard(player2);
+displayBoard(player1Board);
+displayBoard(player2Board);
+hideGameboard(player2Board);
 
 function displayBoard(gameboard) {
     const name = document.createElement("h1");
@@ -40,19 +50,29 @@ function hideGameboard(gameboard) {
 
 }
 
-function pickSpace(opponent, attack) {
-    const opponentSpaces = document.querySelectorAll(`.${opponent.name}`);
-    opponentSpaces.forEach(space => {
+function pickSpace() {
+    const computerSpaces = document.querySelectorAll(".computer");
+    computerSpaces.forEach(space => {
         space.onclick = () => {
-             attack = space.textContent;
+            player1.attack = space.dataset.id;
+            getComputerAttack(player2, player1Board);
+            playRound(player1, player2, player1Board, player2Board);
         }
     })
+}
+
+function getComputerAttack(player, gameboard) {
+    let currentMove = gameboard.positions[Math.floor(Math.random() * (gameboard.positions.length - 1))];
+    while (player.attackList.includes(currentMove)) {
+        currentMove = gameboard.positions[Math.floor(Math.random() * (gameboard.positions.length - 1))];
+    }
+    player.attackList.push(currentMove);
+    player.attack = currentMove;
 }
 
 function markAttack(opponent, attack, gameboard) {
     const opponentSpaces = document.querySelectorAll(`.${opponent.name}`);
     for (let i = 0; i < gameboard.shipList.length; i++) {
-        // console.log("Hit positions: " + gameboard.shipList[i].hitPositions);
         opponentSpaces.forEach(space => {
             if (gameboard.shipList[i].hitPositions.includes(space.dataset.id)) {
                 space.style.backgroundColor = "red";
@@ -66,15 +86,6 @@ function markAttack(opponent, attack, gameboard) {
             }
         })
     }
-    // opponentSpaces.forEach(space => {
-    //     if (space.textContent === attack) {
-    //         space.classList.add("missed");
-    //         const dot = document.createElement("div");
-    //         dot.classList.add("dot");
-    //         space.appendChild(dot);
-    //     }
-        
-    // })
 }
 
 function announceWinner(gameboard) {
