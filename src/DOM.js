@@ -4,7 +4,6 @@ import { playRound } from "./game";
 
 const player1 = Player("you");
 const player2 = Player("computer");
-const button = document.querySelector("button");
 const player1Board = Gameboard(player1);
 const player2Board = Gameboard(player2);
 displayBoard(player1Board);
@@ -75,17 +74,18 @@ function markAttack(opponent, attack, gameboard) {
     for (let i = 0; i < gameboard.shipList.length; i++) {
         opponentSpaces.forEach(space => {
             if (gameboard.shipList[i].hitPositions.includes(space.dataset.id)) {
-                space.style.backgroundColor = "red";
-            } else if (space.dataset.id === attack) {
-                space.classList.add("missed");
-                if (space.innerHTML === "") {
-                    const dot = document.createElement("div");
-                    dot.classList.add("dot");
-                    space.appendChild(dot);
-                }
-            }
+                space.classList.add("hit");
+            } 
         })
     }
+    opponentSpaces.forEach(space => {
+        if (space.dataset.id === attack && !(space.classList.contains("hit"))) {
+            space.classList.add("missed");
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            space.appendChild(dot);
+        }
+    })
 }
 
 function announceWinner(gameboard) {

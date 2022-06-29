@@ -152,12 +152,10 @@ function Gameboard (player) {
         ship4,
         shipList,
         receiveAttack: (attack) => {
-            // console.log(`${player.name} receive attack: ` + attack);
             let flag = false;
             for (let i = 0; i < shipList.length; i++) {
                 if (shipList[i].position.includes(attack)) {
                     shipList[i].hit(attack);
-                    // console.log("HIT");
                     flag = true;
                 }
             }

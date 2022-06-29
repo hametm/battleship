@@ -5,9 +5,8 @@ body {
 
 #canvas {
     display: flex;
-    flex-direction: column;
     gap: 20px;
-    justify-content: center;
+    align-content: center;
 }
 
 .board {
@@ -42,6 +41,10 @@ body {
     border: 1px solid grey;
     display: grid;
     place-items: center;
+}
+
+.hit {
+    background-color: red;
 }
 
 .missed {

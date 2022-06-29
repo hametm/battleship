@@ -1,15 +1,10 @@
-import { Player } from './player';
-import { Gameboard } from './gameboard';
-import { displayBoard, hideGameboard, pickSpace, markAttack, announceWinner } from './DOM';
-import { Ship } from './ship';
+
+import { markAttack, announceWinner } from './DOM';
 
 function playRound(player1, player2, player1Board, player2Board) {
 
     let player1Attack = player1.attack;
     let player2Attack = player2.attack;
-
-    console.log(player1Attack);
-    console.log(player2Attack);
 
     player1.addAttack(player1Attack);
     player2.addAttack(player2Attack);
