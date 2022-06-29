@@ -8,7 +8,6 @@ const player1Board = Gameboard(player1);
 const player2Board = Gameboard(player2);
 displayBoard(player1Board);
 displayBoard(player2Board);
-hideGameboard(player2Board);
 
 function displayBoard(gameboard) {
     const name = document.createElement("h2");

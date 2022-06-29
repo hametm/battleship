@@ -4,8 +4,8 @@ function Ship(position) {
     const hit = (num) => {
         hitPositions.push(num);
     }
-    const isSunk = () => {
-        if (hitPositions.length === length) return true;
+    const isSunk = (positionTest, hitPositionsTest) => {
+        if (hitPositionsTest.length === positionTest.length && positionTest) return true;
     }
     return { length, position, hitPositions, hit, isSunk };
 }

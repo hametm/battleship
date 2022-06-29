@@ -16,10 +16,8 @@ function Gameboard (player) {
     for (let i = 0; i < letters.length; i++) {
         for (let j = 0; j < numbers.length; j++) {
             let position = letters[i] + numbers[j];
-            // positions.push(position);
             getRows(position, i);
             getColumns(position, j);
-            // positions = [byNumber.flat()];
         }
     }
     
@@ -155,6 +153,7 @@ function Gameboard (player) {
         shipList,
         receiveAttack: (attack) => {
             let flag = false;
+            // console.log(attack);
             for (let i = 0; i < shipList.length; i++) {
                 if (shipList[i].position.includes(attack)) {
                     shipList[i].hit(attack);
@@ -171,11 +170,11 @@ function Gameboard (player) {
             // flag = false;
         },
         checkIfSunk: () => {
-            let sunkShips  = 0;
+            let sunkShips = 0;
             for (let i = 0; i < shipList.length; i++) {
-                if (shipList[i].isSunk()) sunkShips ++;
+                if (shipList[i].isSunk(shipList[i].hitPositions, shipList[i].position)) sunkShips++;
             }
-            if (sunkShips === 5) return true;
+            if (sunkShips === 4) return true;
         } 
     };
 };
