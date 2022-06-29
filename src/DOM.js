@@ -11,7 +11,7 @@ displayBoard(player2Board);
 hideGameboard(player2Board);
 
 function displayBoard(gameboard) {
-    const name = document.createElement("h1");
+    const name = document.createElement("h2");
     name.textContent = `${gameboard.player.name}`;
     const display = document.getElementById("display");
 
@@ -23,6 +23,7 @@ function displayBoard(gameboard) {
     letterContainer.classList.add("letterContainer");
     boardContainer.classList.add("boardContainer");
     board.classList.add("board");
+    boardContainer.appendChild(name);
 
 
     for (let i = 0; i < gameboard.positions.length; i++) {
@@ -52,8 +53,6 @@ function displayBoard(gameboard) {
     createNumberColumn(numberContainer, letterContainer);
 
     numberContainer.appendChild(board);
-    boardContainer.appendChild(name);
-
 
 }
 
@@ -129,9 +128,6 @@ function markAttack(opponent, attack, gameboard) {
     opponentSpaces.forEach(space => {
         if (space.dataset.id === attack && !(space.classList.contains("hit"))) {
             space.classList.add("missed");
-            const dot = document.createElement("div");
-            dot.classList.add("dot");
-            space.appendChild(dot);
         }
     })
 }
