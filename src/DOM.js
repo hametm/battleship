@@ -100,9 +100,13 @@ function pickSpace() {
     const computerSpaces = document.querySelectorAll(".computer");
     computerSpaces.forEach(space => {
         space.onclick = () => {
-            player1.attack = space.dataset.id;
-            getComputerAttack(player2, player1Board);
-            playRound(player1, player2, player1Board, player2Board);
+            if (space.classList.contains("hit") || space.classList.contains("missed")) return 0;
+            else {
+                console.log("clicked");
+                player1.attack = space.dataset.id;
+                getComputerAttack(player2, player1Board);
+                playRound(player1, player2, player1Board, player2Board);
+            }
         }
     })
 }
