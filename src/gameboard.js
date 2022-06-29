@@ -51,7 +51,7 @@ function Gameboard (player) {
 
     const pickPositions = (ship) => {
         let shipPositions = [];
-        let length = Math.floor(Math.random() * 4 + 1);
+        let length = Math.floor(Math.random() * 3 + 2);
         let startPosition;
         let outerLetterIndex;
         let innerLetterIndex;
