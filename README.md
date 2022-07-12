@@ -1,2 +1,3 @@
 # battleship
-Battleship project for The Odin Project. Photo credit to iStock and Freepik.
+Battleship project for The Odin Project. 
+Icons by Freepik - Flaticon.
