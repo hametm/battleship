@@ -141,12 +141,26 @@ h2 {
     place-items: center;
 }
 
+@keyframes glow {
+    from {
+        box-shadow: none;
+    }
+    to {
+        box-shadow: 
+        2px 0px 5px 3px #f9cd1f, 
+        0px 2px 5px 3px  #f9cd1f, 
+        -2px 0px 5px 3px  #f9cd1f, 
+        0px -2px 5px 3px  #f9cd1f;
+    }
+}
+
 .hit {
     background-image: url(./images/smile.png);
     background-position: center;
     background-size: 80%;
     background-repeat: no-repeat;
     background-color:#f3e080;
+    animation: glow 1s linear alternate infinite;
 }
 
 .missed {
@@ -162,7 +176,7 @@ h2 {
 
 .lollipop {
     background-image: url(./images/lollipop.png);
-    background-color: rgb(200, 254, 220);
+    background-color: rgb(216, 251, 229);
 }
 
 .cat {
@@ -183,7 +197,7 @@ h2 {
 }
 
 .space.computer:hover {
-    background-color: rgb(197, 197, 215);
+    background-color: #fbf7f5;
     cursor: pointer;
 }
 
