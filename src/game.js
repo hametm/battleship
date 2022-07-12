@@ -13,7 +13,8 @@ function playRound(player1, player2, player1Board, player2Board) {
     player1Board.receiveAttack(player2Attack);
 
     markAttack(player2, player1Attack, player2Board);
-    markAttack(player1, player2Attack, player1Board);
+    markAttack(player1, player2Attack, player1Board), 3000;
+    
 
     player1Board.checkIfSunk();
     player2Board.checkIfSunk();

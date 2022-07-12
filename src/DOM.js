@@ -1,6 +1,10 @@
 import { Gameboard } from "./gameboard";
 import { Player } from "./player";
 import { playRound } from "./game";
+import iceCream from "./images/ice-cream.png";
+import lollipop from "./images/lollipop.png";
+import cat from "./images/cat.png";
+// import panda from "./iamges/panda.png";
 
 const player1 = Player("you");
 const player2 = Player("computer");
@@ -17,15 +21,15 @@ function displayBoard(gameboard) {
 
     const board = document.createElement("div");
     const boardContainer = document.createElement("div");
-    const numberContainer = document.createElement("div");
-    const letterContainer = document.createElement("div");
+    const numbersAndBoard = document.createElement("div");
     const fullBoard = document.createElement("div");
+    const nameAndBoard = document.createElement("div");
 
-    numberContainer.classList.add("numberContainer");
-    letterContainer.classList.add("letterContainer", `${gameboard.player.name}Container`);
+    numbersAndBoard.classList.add("numbersAndBoard");
+    fullBoard.classList.add("fullBoard", `${gameboard.player.name}Container`);
     board.classList.add("board");
     boardContainer.classList.add("boardContainer");
-    fullBoard.classList.add("fullBoard");
+    nameAndBoard.classList.add("nameAndBoard", `${gameboard.player.name}Board`);
 
     for (let i = 0; i < gameboard.positions.length; i++) {
         const space = document.createElement("div");
@@ -33,7 +37,7 @@ function displayBoard(gameboard) {
         space.classList.add(`${gameboard.player.name}`);
         space.dataset.id = `${gameboard.positions[i]}`;
         board.appendChild(space);
-        display.appendChild(fullBoard);
+        display.appendChild(nameAndBoard);
         if (gameboard.ship1.position.includes(space.dataset.id)) {
             space.classList.add("taken", "taken1");
         }
@@ -48,14 +52,14 @@ function displayBoard(gameboard) {
         }
     }
 
-    letterContainer.appendChild(numberContainer);
+    fullBoard.appendChild(numbersAndBoard);
     boardContainer.appendChild(board);
-    fullBoard.appendChild(name, letterContainer);
+    nameAndBoard.appendChild(name, fullBoard);
 
-    createLetterRow(letterContainer, fullBoard);
-    createNumberColumn(numberContainer, letterContainer);
+    createLetterRow(fullBoard, nameAndBoard);
+    createNumberColumn(numbersAndBoard, fullBoard);
 
-    numberContainer.appendChild(boardContainer);
+    numbersAndBoard.appendChild(boardContainer);
 
 }
 
@@ -107,7 +111,6 @@ function pickSpace() {
         space.onclick = () => {
             if (space.classList.contains("hit") || space.classList.contains("missed")) return 0;
             else {
-                console.log("clicked");
                 player1.attack = space.dataset.id;
                 getComputerAttack(player2, player1Board);
                 playRound(player1, player2, player1Board, player2Board);
@@ -136,9 +139,15 @@ function markAttack(opponent, attack, gameboard) {
     }
     opponentSpaces.forEach(space => {
         if (space.dataset.id === attack && !(space.classList.contains("hit"))) {
-            space.classList.add("missed");
+            space.classList.add("missed", getBackgroundImage());
         }
     })
+}
+
+function getBackgroundImage() {
+    const backgroundList = ["iceCream", "lollipop", "cat", "panda"];
+    let index = Math.floor(Math.random() * 4);
+    return backgroundList[index];
 }
 
 function resetGame() {

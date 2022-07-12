@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Londrina+Sketch&family=Londrina+Solid&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Sketch&family=Londrina+Solid&family=Nunito:wght@400;700&display=swap');
 
 body {
     margin: 0;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;    
     display: grid;
     grid-template-rows: auto;
     min-height: 100vh;
@@ -80,7 +80,7 @@ h2 {
 
 }
 
-.numberContainer {
+.numbersAndBoard {
     display: flex;
     align-items: flex-start;
     height: 100%;
@@ -100,10 +100,6 @@ h2 {
     width: 10%;
 }
 
-.letterContainer {
-
-}
-
 .letterSpace, .numberSpace {
     height: 100%;
     width: 100%;
@@ -111,9 +107,12 @@ h2 {
     place-items: center;
 }
 
-.letterContainer {
-    height: 400px;
-    width: 400px;
+.fullBoard {
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .taken {
@@ -143,15 +142,37 @@ h2 {
 }
 
 .hit {
-    background-image: url(./images/cow.png);
+    background-image: url(./images/smile.png);
     background-position: center;
-    background-size: cover;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-color:#f3e080;
 }
 
 .missed {
-    background-image: url(./images/grass.png);
     background-position: center;
-    background-size: cover;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.iceCream {
+    background-image: url(./images/ice-cream.png);
+    background-color: rgb(251, 217, 223);
+}
+
+.lollipop {
+    background-image: url(./images/lollipop.png);
+    background-color: rgb(200, 254, 220);
+}
+
+.cat {
+    background-image: url(./images/cat.png);
+    background-color: rgb(238, 217, 251);
+}
+
+.panda {
+    background-image: url(./images/panda.png);
+    background-color: rgb(255, 220, 167);
 }
 
 .dot {
@@ -164,6 +185,10 @@ h2 {
 .space.computer:hover {
     background-color: rgb(197, 197, 215);
     cursor: pointer;
+}
+
+.space.computer:active {
+    transform: scale(.9);
 }
 
 @keyframes fadein {
