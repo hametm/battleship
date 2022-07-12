@@ -1,10 +1,6 @@
 import { Gameboard } from "./gameboard";
 import { Player } from "./player";
 import { playRound } from "./game";
-import iceCream from "./images/ice-cream.png";
-import lollipop from "./images/lollipop.png";
-import cat from "./images/cat.png";
-import panda from "./images/panda.png";
 
 const player1 = Player("you");
 const player2 = Player("computer");
@@ -16,7 +12,12 @@ hideGameboard(player2Board);
 
 function displayBoard(gameboard) {
     const name = document.createElement("h2");
-    name.textContent = `${gameboard.player.name}`;
+    if (gameboard.player.name === "you") {
+        name.textContent = "プラル";
+    } 
+    else if (gameboard.player.name === "computer") {
+        name.textContent = "コンピューター";
+    }
     const display = document.getElementById("display");
 
     const board = document.createElement("div");

@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Londrina+Sketch&family=Londrina+Solid&family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Noto+Sans+JP&family=Nunito:wght@400;700&display=swap');
 
 :root {
     --yellow: #f3e080;
+    --text: rgb(83, 83, 83);
 }
 
 html {
@@ -13,50 +14,33 @@ body {
     margin: 0;
     font-family: 'Nunito', sans-serif;    
     display: grid;
+    gap: 2rem;
     grid-template-rows: auto;
     min-height: 100vh;
-    background-color: #fbf9f8;
-    color: rgb(83, 83, 83);
+    background-color: #f9d0d0;
+    color: rgb(65, 103, 201);
+    padding-left: 8vw;
+    padding-right: 8vw;
 }
 
 header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    background-color: var(--yellow); 
+    align-items: center;
+    /* background-color: var(--yellow);  */
 }
 
 header h1 {
     font-size: 4.5rem;
-    margin: 2rem 0 1rem 3rem;
     letter-spacing: 1px;
-    font-family: 'Londrina Sketch', cursive;
+    font-family: 'Mochiy Pop P One', sans-serif;
 }
-
-main {
-    padding-left: 3rem;
-    padding-right: 3rem;
-}
-
-main h2 {
-    margin: 15px auto;
-    text-align: left;
-    margin-left: 10%;
-}
-
-/* main p {
-    font-size: 1.2rem;
-    margin-top: 2rem;
-} */
 
 #display {
     display: flex;
-    gap: 20px;
-    align-content: center;
     justify-content: space-around;
-    padding-bottom: 5%;
-    margin-top: 4rem;
+    align-content: center;
 }
 
 .board {
@@ -83,12 +67,14 @@ main h2 {
 }
 
 .letterHeader {
+    color: var(--text);
     display: grid;
     grid-template-columns: repeat(11, 1fr);
     width: 100%;
 }
 
 .numberHeader {
+    color: var(--text);
     display: grid;
     grid-template-rows: (repeat(10, 1fr));
     height: 100%;
@@ -102,6 +88,18 @@ main h2 {
     place-items: center;
 }
 
+.nameAndBoard {
+    display: flex;
+}
+
+.nameAndBoard h2 {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    margin: 0;
+    font-size: 2rem;
+
+}
+
 .fullBoard {
     display: flex;
     flex-direction: column;
@@ -112,32 +110,7 @@ main h2 {
     width: 33vw;
     padding-right: max(2vw, 30px);
     padding-bottom: max(2vw, 30px);
-
 }
-
-/* .computerBoard {
-    min-height: 400px;
-    min-width: 400px;
-    height: 40vw;
-    width: 40vw;
-}
-
-.youBoard {
-    min-height: 300px;
-    min-width: 300px;
-    height: 30vw;
-    width: 30vw;
-} */
-
-/* .computerCard {
-    padding-right: max(5vw, 40px);
-    padding-bottom: max(5vw, 40px);
-}
-
-.youCard {
-    padding-right: max(4vw, 32px);
-    padding-bottom: max(4vw, 32px);
-} */
 
 .taken1 {
     background: rgb(222, 160, 171) url(./images/smile.png) no-repeat center;
@@ -145,12 +118,12 @@ main h2 {
 }
 
 .taken2 {
-    background: rgb(59, 180, 137) url(./images/smile.png) no-repeat center;
+    background: rgb(76, 224, 172) url(./images/smile.png) no-repeat center;
     background-size: 80%;
 }
 
 .taken3 {
-    background: rgb(80, 117, 204) url(./images/smile.png) no-repeat center;
+    background: rgb(92, 205, 230) url(./images/smile.png) no-repeat center;
     background-size: 80%;
 }
 
@@ -160,7 +133,7 @@ main h2 {
 }
 
 .space {
-    border: 1px solid grey;
+    border: 1px solid var(--text);
     display: grid;
     place-items: center;
     border-radius: 5px;
@@ -193,7 +166,7 @@ main h2 {
 
 .iceCream {
     background-image: url(./images/ice-cream.png);
-    background-color: rgb(251, 217, 223);
+    background-color: rgb(248, 188, 199);
 }
 
 .lollipop {
@@ -219,7 +192,7 @@ main h2 {
 }
 
 .space.computer:hover {
-    background-color: #f7f0ec;
+    background-color: #f7dcdc;
 }
 
 .computerSpaces:hover {
@@ -268,5 +241,37 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    margin-top: 20px;
+    margin-top: auto;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    header h1 {
+        font-size: 2.2rem;
+    }
+    
+    main {
+        padding: 0;
+    }
+
+    .nameAndBoard {
+        flex-direction: column;
+    }
+
+    .nameAndBoard h2 {
+        writing-mode: horizontal-tb;
+        font-size: 1.4rem;
+        margin-bottom: .3rem;
+    }
+
+    #display {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
