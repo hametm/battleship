@@ -18,13 +18,14 @@ function displayBoard(gameboard) {
     const board = document.createElement("div");
     const boardContainer = document.createElement("div");
     const numberContainer = document.createElement("div");
-    numberContainer.classList.add("numberContainer");
     const letterContainer = document.createElement("div");
-    letterContainer.classList.add("letterContainer");
-    boardContainer.classList.add("boardContainer");
-    board.classList.add("board");
-    boardContainer.appendChild(name);
+    const fullBoard = document.createElement("div");
 
+    numberContainer.classList.add("numberContainer");
+    letterContainer.classList.add("letterContainer", `${gameboard.player.name}Container`);
+    board.classList.add("board");
+    boardContainer.classList.add("boardContainer");
+    fullBoard.classList.add("fullBoard");
 
     for (let i = 0; i < gameboard.positions.length; i++) {
         const space = document.createElement("div");
@@ -32,7 +33,7 @@ function displayBoard(gameboard) {
         space.classList.add(`${gameboard.player.name}`);
         space.dataset.id = `${gameboard.positions[i]}`;
         board.appendChild(space);
-        display.appendChild(boardContainer);
+        display.appendChild(fullBoard);
         if (gameboard.ship1.position.includes(space.dataset.id)) {
             space.classList.add("taken", "taken1");
         }
@@ -46,28 +47,30 @@ function displayBoard(gameboard) {
             space.classList.add("taken","taken4");
         }
     }
-    letterContainer.appendChild(numberContainer)
-    boardContainer.appendChild(letterContainer);
 
-    createLetterRow(letterContainer, boardContainer);
+    letterContainer.appendChild(numberContainer);
+    boardContainer.appendChild(board);
+    fullBoard.appendChild(name, letterContainer);
+
+    createLetterRow(letterContainer, fullBoard);
     createNumberColumn(numberContainer, letterContainer);
 
-    numberContainer.appendChild(board);
+    numberContainer.appendChild(boardContainer);
 
 }
 
 function createLetterRow(container1, container2) {
     const letters = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-    const container = document.querySelector(".boardContainer");
     const header = document.createElement("div");
-    const display = document.getElementById("display");
     header.classList.add("letterHeader");
+
     for (let i = 0; i < letters.length; i++) {
         const letterSpace = document.createElement("div");
         letterSpace.textContent = letters[i];
         letterSpace.classList.add("letterSpace");
         header.appendChild(letterSpace);
     }
+
     container1.appendChild(header);
     container2.appendChild(container1);
 }
@@ -76,12 +79,14 @@ function createNumberColumn(container1, container2) {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const header = document.createElement("div");
     header.classList.add("numberHeader");
+
     for (let i = 0; i < numbers.length; i++) {
         const numberSpace = document.createElement("div");
         numberSpace.textContent = numbers[i];
         numberSpace.classList.add("numberSpace");
         header.appendChild(numberSpace);
     }
+
     container1.appendChild(header);
     container2.appendChild(container1);
 }
@@ -150,28 +155,32 @@ function resetGame() {
 }
 
 function announceWinner(gameboard) {
+
     if (gameboard.checkIfSunk()) {
         const boards = document.querySelectorAll(".board");
         boards.forEach(board => {
             board.classList.add("loser");
         });
+
         const display = document.getElementById("display");
         const announcement = document.createElement("div");
         const announcementText = document.createElement("h3");
         const playAgainBtn = document.createElement("button");
         playAgainBtn.textContent = "Play again";
         announcement.classList.add("announcement");
+
         if (gameboard.player.name === "computer") {
             announcementText.textContent = "You win!";
         }
         if (gameboard.player.name === "you") {
             announcementText.textContent = "The computer wins!";
         }
+
         announcement.appendChild(announcementText);
         display.appendChild(announcement);
+
         playAgainBtn.onclick = () => {
             resetGame();
-            
             const player1Board = Gameboard(player1);
             const player2Board = Gameboard(player2);
             displayBoard(player1Board);

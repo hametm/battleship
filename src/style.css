@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Sketch&family=Londrina+Solid&display=swap');
 
 body {
     margin: 0;
@@ -6,7 +6,7 @@ body {
     display: grid;
     grid-template-rows: auto;
     min-height: 100vh;
-    background-color: rgb(255, 243, 244);
+    background-color: #fbf7f5;
     color: rgb(83, 83, 83);
 }
 
@@ -14,27 +14,33 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 30px 50px;
+    align-items: flex-start;
+    background-color: #f3e080;
+        
 }
 
-header p {
-    font-size: 1.25rem;
-    margin: 0;
+.rainbow {
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, 
+    rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, 
+    rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
+    border-top: 3px solid grey;
+    border-bottom: 3px solid grey;
 }
 
-h1 {
+header h1 {
     font-size: 4.5rem;
-    margin: 0;
-    font-family: 'Moo Lah Lah', cursive;
+    margin: 2rem 0 1rem 2rem;
     letter-spacing: 1px;
+    font-family: 'Londrina Sketch', cursive;
 }
 
-#spots {
+/* #spots {
     height: 12px;
     background-color: grey;
     display: none;
-}
+} */
 
 h2 {
     margin: 15px auto;
@@ -54,32 +60,60 @@ h2 {
     display: grid;
     height: 100%;
     width: 100%;
-    grid-template-rows: repeat(10, 50px);
-    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, minmax(10px, 1fr));
+    grid-template-columns: repeat(10, minmax(10px, 1fr));
     margin: 0;
     place-content: center;
     background-color: white;
 }
 
+.boardContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.youContainer {
+
+}
+
+.computerContainer {
+
+}
+
 .numberContainer {
     display: flex;
     align-items: flex-start;
+    height: 100%;
+    width: 100%;
 }
 
 .letterHeader {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    width: 100%;
 }
 
 .numberHeader {
+    display: grid;
+    grid-template-rows: (repeat(10, 1fr));
+    height: 100%;
+    width: 10%;
+}
+
+.letterContainer {
 
 }
 
 .letterSpace, .numberSpace {
-    height: 50px;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.letterContainer {
+    height: 400px;
+    width: 400px;
 }
 
 .taken {
