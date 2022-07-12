@@ -1,12 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Londrina+Sketch&family=Londrina+Solid&family=Nunito:wght@400;700&display=swap');
 
+:root {
+    --yellow: #f3e080;
+}
+
+html {
+    cursor: url(./images/cursor.png), default;
+    min-height: 100%;
+}
+
 body {
     margin: 0;
     font-family: 'Nunito', sans-serif;    
     display: grid;
     grid-template-rows: auto;
     min-height: 100vh;
-    background-color: #fbf7f5;
+    background-color: #fbf9f8;
     color: rgb(83, 83, 83);
 }
 
@@ -15,45 +24,39 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    background-color: #f3e080;
-        
-}
-
-.rainbow {
-    height: 10px;
-    width: 100%;
-    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, 
-    rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, 
-    rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
-    border-top: 3px solid grey;
-    border-bottom: 3px solid grey;
+    background-color: var(--yellow); 
 }
 
 header h1 {
     font-size: 4.5rem;
-    margin: 2rem 0 1rem 2rem;
+    margin: 2rem 0 1rem 3rem;
     letter-spacing: 1px;
     font-family: 'Londrina Sketch', cursive;
 }
 
-/* #spots {
-    height: 12px;
-    background-color: grey;
-    display: none;
-} */
-
-h2 {
-    margin: 15px auto;
-    text-align: center;
+main {
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
+
+main h2 {
+    margin: 15px auto;
+    text-align: left;
+    margin-left: 10%;
+}
+
+/* main p {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+} */
 
 #display {
     display: flex;
     gap: 20px;
     align-content: center;
-    justify-content: space-evenly;
-    width: 95%;
+    justify-content: space-around;
     padding-bottom: 5%;
+    margin-top: 4rem;
 }
 
 .board {
@@ -64,20 +67,12 @@ h2 {
     grid-template-columns: repeat(10, minmax(10px, 1fr));
     margin: 0;
     place-content: center;
-    background-color: white;
+    gap: 3px;
 }
 
 .boardContainer {
     height: 100%;
     width: 100%;
-}
-
-.youContainer {
-
-}
-
-.computerContainer {
-
 }
 
 .numbersAndBoard {
@@ -108,37 +103,67 @@ h2 {
 }
 
 .fullBoard {
-    height: 500px;
-    width: 500px;
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    min-height: 300px;
+    min-width: 300px;
+    height: 33vw;
+    width: 33vw;
+    padding-right: max(2vw, 30px);
+    padding-bottom: max(2vw, 30px);
+
 }
 
-.taken {
-    color: white;
+/* .computerBoard {
+    min-height: 400px;
+    min-width: 400px;
+    height: 40vw;
+    width: 40vw;
 }
+
+.youBoard {
+    min-height: 300px;
+    min-width: 300px;
+    height: 30vw;
+    width: 30vw;
+} */
+
+/* .computerCard {
+    padding-right: max(5vw, 40px);
+    padding-bottom: max(5vw, 40px);
+}
+
+.youCard {
+    padding-right: max(4vw, 32px);
+    padding-bottom: max(4vw, 32px);
+} */
 
 .taken1 {
-    background-color: rgb(222, 160, 171);
+    background: rgb(222, 160, 171) url(./images/smile.png) no-repeat center;
+    background-size: 80%;
 }
 
 .taken2 {
-    background-color: rgb(59, 180, 137);
+    background: rgb(59, 180, 137) url(./images/smile.png) no-repeat center;
+    background-size: 80%;
 }
 
 .taken3 {
-    background-color: rgb(80, 117, 204);
+    background: rgb(80, 117, 204) url(./images/smile.png) no-repeat center;
+    background-size: 80%;
 }
 
 .taken4 {
-    background-color: rgb(232, 179, 20);
+    background: rgb(232, 179, 20) url(./images/smile.png) no-repeat center;
+    background-size: 80%;
 }
 
 .space {
     border: 1px solid grey;
     display: grid;
     place-items: center;
+    border-radius: 5px;
 }
 
 @keyframes glow {
@@ -155,11 +180,8 @@ h2 {
 }
 
 .hit {
-    background-image: url(./images/smile.png);
-    background-position: center;
+    background: var(--yellow) url(./images/smile.png) no-repeat center;
     background-size: 80%;
-    background-repeat: no-repeat;
-    background-color:#f3e080;
     animation: glow 1s linear alternate infinite;
 }
 
@@ -197,8 +219,11 @@ h2 {
 }
 
 .space.computer:hover {
-    background-color: #fbf7f5;
-    cursor: pointer;
+    background-color: #f7f0ec;
+}
+
+.computerSpaces:hover {
+    cursor: url(./images/pointer.png), pointer;
 }
 
 .space.computer:active {

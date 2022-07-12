@@ -4,7 +4,7 @@ import { playRound } from "./game";
 import iceCream from "./images/ice-cream.png";
 import lollipop from "./images/lollipop.png";
 import cat from "./images/cat.png";
-// import panda from "./iamges/panda.png";
+import panda from "./images/panda.png";
 
 const player1 = Player("you");
 const player2 = Player("computer");
@@ -26,10 +26,10 @@ function displayBoard(gameboard) {
     const nameAndBoard = document.createElement("div");
 
     numbersAndBoard.classList.add("numbersAndBoard");
-    fullBoard.classList.add("fullBoard", `${gameboard.player.name}Container`);
-    board.classList.add("board");
+    fullBoard.classList.add("fullBoard", `${gameboard.player.name}Board`);
+    board.classList.add("board", `${gameboard.player.name}Spaces`);
     boardContainer.classList.add("boardContainer");
-    nameAndBoard.classList.add("nameAndBoard", `${gameboard.player.name}Board`);
+    nameAndBoard.classList.add("nameAndBoard", `${gameboard.player.name}Card`);
 
     for (let i = 0; i < gameboard.positions.length; i++) {
         const space = document.createElement("div");
@@ -42,13 +42,13 @@ function displayBoard(gameboard) {
             space.classList.add("taken", "taken1");
         }
         if (gameboard.ship2.position.includes(space.dataset.id)) {
-            space.classList.add("taken","taken2");
+            space.classList.add("taken", "taken2");
         }
         if (gameboard.ship3.position.includes(space.dataset.id)) {
-            space.classList.add("taken","taken3");
+            space.classList.add("taken", "taken3");
         }
         if (gameboard.ship4.position.includes(space.dataset.id)) {
-            space.classList.add("taken","taken4");
+            space.classList.add("taken", "taken4");
         }
     }
 
