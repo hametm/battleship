@@ -2,6 +2,7 @@
 
 :root {
     --yellow: #f3e080;
+    --blue: rgb(65, 103, 201);
 }
 
 html {
@@ -16,8 +17,7 @@ body {
     grid-template-rows: auto;
     min-height: 100vh;
     background-color: #f9d0d0;
-    color: rgb(65, 103, 201);
-    padding-left: 8vw;
+    color: var(--blue);
     padding-right: 8vw;
 }
 
@@ -220,18 +220,38 @@ header p {
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
-    animation: linear .5s fadein;
+    animation: linear .25s fadein;
     font-size: 3rem;
-    background-color: white;
+    border-radius: 13px;
+    border: 1px solid black;
+    background-image: linear-gradient(90deg, #47cacc, #63bcc9, #cdb3d4, #e7b7c8, #ffbe88);
     height: 30%;
     width: 30%;
     box-shadow: -2px 2px 5px grey;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
 }
 
-h3 {
+.announcement h3 {
     margin: 0;
+}
+
+.playAgainBtn {
+    font-family: 'Nunito', sans-serif;    
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    background-color: var(--blue);
+    font-size: 1.2rem;
+    color: white;
+}
+
+.playAgainBtn:hover {
+    cursor: pointer;
+    background-color: rgb(40, 67, 136);
 }
 
 .loser {

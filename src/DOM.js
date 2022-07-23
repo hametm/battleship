@@ -177,6 +177,7 @@ function announceWinner(gameboard) {
         const announcementText = document.createElement("h3");
         const playAgainBtn = document.createElement("button");
         playAgainBtn.textContent = "Play again";
+        playAgainBtn.classList.add("playAgainBtn");
         announcement.classList.add("announcement");
 
         if (gameboard.player.name === "computer") {
@@ -186,16 +187,12 @@ function announceWinner(gameboard) {
             announcementText.textContent = "The computer wins!";
         }
 
-        announcement.appendChild(announcementText);
+        announcement.append(announcementText, playAgainBtn);
+        console.log(playAgainBtn);
         display.appendChild(announcement);
 
         playAgainBtn.onclick = () => {
-            resetGame();
-            const player1Board = Gameboard(player1);
-            const player2Board = Gameboard(player2);
-            displayBoard(player1Board);
-            displayBoard(player2Board);
-            pickSpace();
+            location.reload();
         }
     }
 }
