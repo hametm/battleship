@@ -23,6 +23,12 @@ body {
     padding-right: 8vw;
 }
 
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 header {
     display: flex;
     flex-direction: column;
@@ -35,12 +41,14 @@ header h1 {
     font-size: 4.5rem;
     letter-spacing: 1px;
     font-family: 'Mochiy Pop P One', sans-serif;
+    margin: 0;
 }
 
 #display {
     display: flex;
     justify-content: space-around;
     align-content: center;
+    gap: 1rem;
 }
 
 .board {
@@ -104,12 +112,11 @@ header h1 {
     display: flex;
     flex-direction: column;
     gap: .5rem;
-    min-height: 300px;
-    min-width: 300px;
+    min-height: 350px;
+    min-width: 350px;
     height: 33vw;
     width: 33vw;
     padding-right: max(2vw, 30px);
-    padding-bottom: max(2vw, 30px);
 }
 
 .taken1 {
@@ -246,13 +253,22 @@ footer {
 }
 
 @media (max-width: 480px) {
+    header h1 {
+        font-size: 2.2rem;
+        margin-top: 1rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 900px) {
+    header h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 900px) {
     body {
         padding-left: 1rem;
         padding-right: 1rem;
-    }
-    
-    header h1 {
-        font-size: 2.2rem;
     }
     
     main {
