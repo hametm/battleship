@@ -13,7 +13,7 @@ hideGameboard(player2Board);
 function displayBoard(gameboard) {
     const name = document.createElement("h2");
     if (gameboard.player.name === "you") {
-        name.textContent = "プレイア";
+        name.textContent = "ヒューマン";
     } 
     else if (gameboard.player.name === "computer") {
         name.textContent = "コンピューター";
