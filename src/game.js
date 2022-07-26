@@ -14,7 +14,6 @@ function playRound(player1, player2, player1Board, player2Board) {
 
     markAttack(player2, player1Attack, player2Board);
     markAttack(player1, player2Attack, player1Board);
-    
 
     player1Board.checkIfSunk();
     player2Board.checkIfSunk();

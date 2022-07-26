@@ -1,7 +1,7 @@
 import { Ship } from "./ship";
 
 function Gameboard (player) {
-    const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+    const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let byLetter = [[],[],[],[],[],[],[],[],[],[]];
     let byNumber = [[],[],[],[],[],[],[],[],[],[]];
@@ -61,7 +61,6 @@ function Gameboard (player) {
 
         getStartPosition();
 
-
         function getStartPosition() {
             startPosition = positions[Math.floor(Math.random() * (positions.length - 1))]; // Add 1 at the end?
             while (checkIfTaken(startPosition)) {
@@ -98,7 +97,7 @@ function Gameboard (player) {
             }
         }   
 
-        // Ship if horizontal
+        // Ship coordinates, if horizontal
         if (direction === 1) {
             let innerIndex = innerLetterIndex;
             let outerIndex = outerLetterIndex;
@@ -117,7 +116,7 @@ function Gameboard (player) {
             ship.position = shipPositions;
         }
 
-        // Ship if vertical
+        // Ship coordinates, if vertical
         if (direction === 2) {
             let innerIndex = innerNumberIndex;
             let outerIndex = outerNumberIndex;
@@ -135,12 +134,11 @@ function Gameboard (player) {
             }
             ship.position = shipPositions;
         }
-    } // End of pick positions
+    }
 
     for (let i = 0; i < shipList.length; i++) {
         pickPositions(shipList[i]);
     }
-
 
     return { 
         player,

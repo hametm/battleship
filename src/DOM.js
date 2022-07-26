@@ -151,19 +151,6 @@ function getBackgroundImage() {
     return backgroundList[index];
 }
 
-function resetGame() {
-    player1.attackList = [];
-    player2.attackList = [];
-    for (let i = 0; i < player1Board.shipList.length; i++) {
-        player1Board.shipList[i].hitPositions = [];
-    }
-    for (let i = 0; i < player2Board.shipList.length; i++) {
-        player2Board.shipList[i].hitPositions = [];
-    }
-    const display = document.getElementById("display");
-    display.innerHTML = "";
-}
-
 function announceWinner(gameboard) {
 
     if (gameboard.checkIfSunk()) {
@@ -196,7 +183,5 @@ function announceWinner(gameboard) {
         }
     }
 }
-
-
 
 export { displayBoard, hideGameboard, pickSpace, markAttack, announceWinner };
