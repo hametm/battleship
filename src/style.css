@@ -165,6 +165,7 @@ header p {
     background: var(--yellow) url(./images/smile.png) no-repeat center;
     background-size: 80%;
     animation: glow 1s linear alternate infinite;
+    background-position: center;
 }
 
 .missed {
@@ -271,6 +272,11 @@ footer {
     header h1 {
         font-size: 2.2rem;
         margin-top: 1rem;
+    }
+
+    .fullBoard {
+        min-width: 320px;
+        min-height: 320px;
     }
 }
 
